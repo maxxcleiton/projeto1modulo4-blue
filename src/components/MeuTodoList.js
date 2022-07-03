@@ -6,16 +6,16 @@ function MeuTodoList() {
   const [itemNovo, setItemNovo] = useState("");
 
   // console.log("listas: ", listas);
-
+  // 
   const mostrarALista = (event) => {
-  const clone = [...list_mock];
-
+    const clone = [...list_mock];
+    //
     console.log(clone);
-    setListas(clone);
-  };
-
+  setListas(clone);
+};
+    
   const adicionaNovoItemNaLista = (event) => {
-    let new_list = {
+  let new_list = {
       item: itemNovo,
     };
     console.log("new_list: ", new_list);
@@ -25,9 +25,9 @@ function MeuTodoList() {
     setListas(clone2);
     setItemNovo("");
   };
-
   const handleChangeInput = (event) => {
-    setItemNovo(event.target.value);
+
+  setItemNovo(event.target.value);
 };
   const remove = () => {
     
