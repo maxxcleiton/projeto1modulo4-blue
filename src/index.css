@@ -56,6 +56,20 @@ body {
 
 }
 
+.procurar, .adicionar {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    margin-bottom: 20px;
+}
+
+.procurar-text .adicionar-text {
+    /* text-align: center; */
+    /* font-size: 20px;
+    align-items: center; */
+}
+
 .main {
     /* height: 40vh; */
     display: flex;

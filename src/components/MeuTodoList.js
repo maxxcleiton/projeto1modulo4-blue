@@ -1,75 +1,78 @@
-import { list_mock } from "../mock/list";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function MeuTodoList() {
-  const [listas, setListas] = useState([...list_mock]);
-  const [itemNovo, setItemNovo] = useState("");
+    const baseURL = 'http://localhost:8000/';
 
-  // console.log("listas: ", listas);
-  // 
-  const mostrarALista = (event) => {
-    const clone = [...list_mock];
+    // useState
+    const [ todoList, setTodoList ] = useState([])
+
+    const [todo, setTodo ] = useState({
+        todo_id: ""
+    })
+
+    const [novaTodolist, setNovaTodoList ] = useState({
+        text: ""
+    })
+
+    // Async functions
+    // Create = CRUD
+    async function create(todo) {
+        const response = await fetch(baseURL, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify(todo),
+    })
+    const novaTodo = await response.json()
+    setTodoList([novaTodo])
+    }
+    // Read all
+
+    // Read by ID
+
+    // Handle functions (manejo)
+    // Create todo (Create = CRUD)
+    const handleChangeCreate = (event) => {
+        console.log("hangle change create")
+        setNovaTodoList({...novaTodolist, [event.target.name]: event.target.value})
+    }
+    const handleCreateTodo = () => {
+        console.log('Create ToDo: ')
+        const todo_a_ser_criado = {...novaTodolist};
+        create(todo_a_ser_criado)
+        setNovaTodoList({
+            text: ""
+        })
+    }
+    console.log(novaTodolist)
     //
-    console.log(clone);
-  setListas(clone);
-};
-    
-  const adicionaNovoItemNaLista = (event) => {
-  let new_list = {
-      item: itemNovo,
-    };
-    console.log("new_list: ", new_list);
-    const clone2 = [...listas];
-    clone2.push(new_list);
-    console.log("clone2: ", clone2);
-    setListas(clone2);
-    setItemNovo("");
-  };
-  const handleChangeInput = (event) => {
-
-  setItemNovo(event.target.value);
-};
-  const remove = () => {
-    
-  }
-
-  return (
-    <main className="main">
-      <div className="entire-TodoList">
+    return (
         <div>
-          <input
-            onChange={handleChangeInput}
-            placeholder="digite."
-            value={itemNovo}
-          />
-        <button onClick={adicionaNovoItemNaLista}>adiciona.</button>        <button onClick={mostrarALista}>limpa.</button>
-        </div>
-        {/* <div>{itemNovo}</div> */}
-        <h4><br/>fazer hoje →</h4>
-        {listas.map((lista, index) => {
-          return (
-            <div key={`ItemList_${index}`}>
-              <div>
-                {/* <ul> */}
-                  <input type="checkbox"/>{lista.item}
-                {/* </ul> */}
-              </div>
+            <div className="button-label-input">
+                <label
+                htmlFor="criar_todo"
+                className="button-label">
+                    Digite o que irá fazer
+                </label>
+            <input
+            type="text"
+            className="button-input"
+            id="criar_todo"
+            onChange={handleChangeCreate}
+            name="text"
+            value={novaTodolist.text}
+            />
             </div>
-          );
-        })}
-      </div>
-    </main>
-  );
+            <button
+            type="button"
+            className="button-button"
+            onClick={handleCreateTodo}>
+                Adicionar novo todo
+            </button>
+        </div>
+    )
 }
 
-export default MeuTodoList;
-
-
-
-{/* <div>
-<fieldset>
-  <input type="checkbox" name="tarefa" value={lista.item} id={index}/>
-  <label htmlFor="index">{lista.item}</label>
-</fieldset>
-<button onClick={remove}>remove.</button>
-</div> */}
+export default MeuTodoList
