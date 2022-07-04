@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 
 function MeuTodoList() {
-    const baseURL = 'http://localhost:8000/';
+    const baseURL = 'http://localhost:8000/list';
 
     // useState
+    // Aqui é responsável pela renderização em tela (todoList.map(()=>())
     const [ todoList, setTodoList ] = useState([])
-
+    // Usado para fazer a pesquisa no Read by ID
     const [todo, setTodo ] = useState({
         todo_id: ""
     })
-
+    // Usado para definir nova lista no Read All
     const [novaTodolist, setNovaTodoList ] = useState({
         text: ""
     })
@@ -28,7 +29,7 @@ function MeuTodoList() {
     const novaTodo = await response.json()
     setTodoList([novaTodo])
     }
-    // Read all
+   
 
     // Read by ID
 
@@ -47,9 +48,21 @@ function MeuTodoList() {
         })
     }
     console.log(novaTodolist)
-    //
+
+    // Read all
+    async function readAllTodo(){
+        const response = await fetch(baseURL)
+        const todos = await response.json()
+        setTodoList(todos)
+    }
+
+    useEffect(() => {
+        readAllTodo()
+    }, [])
+
     return (
         <div>
+            {/* Form do Create */}
             <div className="button-label-input">
                 <label
                 htmlFor="criar_todo"
@@ -71,6 +84,17 @@ function MeuTodoList() {
             onClick={handleCreateTodo}>
                 Adicionar novo todo
             </button>
+            {/* Form do Read by Id */}
+
+            {/* Read All */}
+            <div>
+            {todoList.map((todo, index) => (
+                <div key={index} className="todoListReadAll">
+                    <input type="checkbox"/>
+                    <span>{todo.text}</span>
+                </div>
+            ))}
+            </div>
         </div>
     )
 }
