@@ -1,4 +1,4 @@
-# Projeto To do List (Blue EdTech - Módulo 4 Projeto 1) - Em produção!
+# Projeto To do List (Blue EdTech - Módulo 4 Projeto 1)
 
 
 ## Descrição:
