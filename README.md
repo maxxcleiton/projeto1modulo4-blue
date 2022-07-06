@@ -2,7 +2,7 @@
 
 
 ## Descrição:
-Site com To do List em funcionamento via ReactJS, CRUD com dados em mock, utilizando de useState, useEffect e renderização de listas.
+Site com To do List em funcionamento via ReactJS, CRUD, utilizando de useState, useEffect e renderização de listas.
 <br>
 Consumindo de uma API (rodando localmente (json server npm))
 <br>
