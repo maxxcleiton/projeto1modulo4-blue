@@ -8,7 +8,7 @@
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
-    width: 100vw;
+    /* width: 100vw; */
     transition: 1.6s;
 }
 
@@ -77,14 +77,27 @@ body {
     justify-content: center;
 }
 
-.todoListReadAll {
-    padding-left: 3rem;
-    text-align: left;
-    z-index: 1;
-}
 .readAllMap {
-    padding-top: 1rem;
-    background-color: rgb(192, 192, 192, 0.3);
+    display: flex;
+    flex-direction: column;
+    /* padding-top: 1rem; */
+    /* background-color: rgb(192, 192, 192, 0.3); */
+    padding-bottom: 5rem
+
+}
+
+.todoListReadAll {
+    /* padding-left: 37vw; */
+    /* padding-bottom: 1rem; */
+    padding: 10px 0px 10px 0px;
+    text-align: left;
+    background-color: rgb(104, 104, 104, 0.3);
+    margin: 5px 0 1px 0; 
+    display: flex;
+    /* margin: 10px; */
+    padding: 10px;
+    /* flex-direction: column; */
+    justify-content: center;
 
 }
 

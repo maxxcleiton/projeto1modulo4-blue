@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 function MeuTodoList() {
   const baseURL = "http://localhost:8000/list";
+  // https://github.com/maxxcleiton/backend-todolist.json-blue
 
   // useState
   // Aqui é responsável pela renderização em tela (todoList.map(()=>())
@@ -16,8 +17,8 @@ function MeuTodoList() {
   });
 
   // Async functions
-  // Create = CRUD
-  async function create(todo) {
+  // Criar = CRUD
+  async function Criar(todo) {
     const response = await fetch(baseURL, {
       method: "post",
       headers: {
@@ -33,18 +34,18 @@ function MeuTodoList() {
   // Read by ID
 
   // Handle functions (manejo)
-  // Create todo (Create = CRUD)
-  const handleChangeCreate = (event) => {
-    console.log("hangle change create");
+  // Criar todo (Criar = CRUD)
+  const mexerMudancaCriar = (event) => {
+    console.log("hangle change Criar");
     setNovaTodoList({
       ...novaTodolist,
       [event.target.name]: event.target.value,
     });
   };
-  const handleCreateTodo = () => {
-    console.log("Create ToDo: ");
+  const mexerCriarTodo = () => {
+    console.log("Criar ToDo: ");
     const todo_a_ser_criado = { ...novaTodolist };
-    create(todo_a_ser_criado);
+    Criar(todo_a_ser_criado);
     setNovaTodoList({
       text: "",
     });
@@ -52,36 +53,36 @@ function MeuTodoList() {
   console.log(novaTodolist);
 
   // Read all
-  async function readAllTodo() {
+  async function renderizarTodosOsTudus() {
     const response = await fetch(baseURL);
     const todos = await response.json();
     setTodoList(todos);
   }
 
   useEffect(() => {
-    readAllTodo();
+    renderizarTodosOsTudus();
   }, []);
 
   // Read by Id
-  async function readOneTodo(id) {
+  async function renderizarApenasUmTodo(id) {
     const response = await fetch(`${baseURL}/${id}`);
-    const paleta = await response.json();
+    const todo = await response.json();
     console.log("Retorno da API Todo: ", todo);
     setTodoList([todo]);
   }
-  const handleClick = (event) => {
+  const mexerNoClick = (event) => {
     const pesquisa_todo_id = todo.todo_id;
-    readOneTodo(pesquisa_todo_id);
+    renderizarApenasUmTodo(pesquisa_todo_id);
   };
-  const handleChange = (event) => {
-    setTodo({ ...todo, [event.target.name]: event.target.value });
+  const mexerMudanca = (event) => {
+    setTodo({...todo, [event.target.name]: event.target.value, });
   };
   return (
     <div>
       <a  className="button-home" href="http://localhost:3000/">
         <button type="button" className="button">Voltar pra HOME</button>
       </a>
-      {/* Form do Create */}
+      {/* Form do Criar */}
       <div className="button-label-input adicionar">
         <label htmlFor="criar_todo" className="button-label adicionar-text">
           adicionar à lista:
@@ -90,14 +91,14 @@ function MeuTodoList() {
           type="text"
           className="input"
           id="criar_todo"
-          onChange={handleChangeCreate}
+          onChange={mexerMudancaCriar}
           name="text"
           value={novaTodolist.text}
         />
         <button
           type="button"
           className="button"
-          onClick={handleCreateTodo}
+          onClick={mexerCriarTodo}
         >
           adicionar.
         </button>
@@ -111,23 +112,23 @@ function MeuTodoList() {
           type="text"
           className="input"
           id="pesquisar_todo"
-          onChange={handleChange}
-          name="text"
+          onChange={mexerMudanca}
+          name="todo_id"
           value={todo.todo_id}
+          // value={novaTodolist.text}
         />
-        <button type="button" className="button" onClick={handleClick}>
+        <button type="button" className="button" onClick={mexerNoClick}>
           Pesquisar
         </button>
       </div>
 
       {/* Read All */}
-      <span>ToDoList</span>
       <div className="readAllMap">
         {todoList.map((todo, index) => (
           <div key={index} className="todoListReadAll">
             <span>→ </span>
             <input type="checkbox" />
-            <span className="todo-text"> {todo.text}</span>
+            <span className="todo-text">  {todo.text} || ID: "{todo.id}"</span>
           </div>
         ))}
       </div>
