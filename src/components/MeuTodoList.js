@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { LabelInputButton } from "./LabelInputButton/LabelInputButton";
 
 function MeuTodoList() {
   const baseURL = "http://localhost:8000/list";
@@ -75,14 +76,35 @@ function MeuTodoList() {
     renderizarApenasUmTodo(pesquisa_todo_id);
   };
   const mexerMudanca = (event) => {
-    setTodo({...todo, [event.target.name]: event.target.value, });
+    setTodo({ ...todo, [event.target.name]: event.target.value });
   };
+
   return (
     <div>
-      <a  className="button-home" href="http://localhost:3000/">
-        <button type="button" className="button">Voltar pra HOME</button>
+      <a className="button-home" href="http://localhost:3000/">
+        <button type="button" className="button">
+          Voltar pra HOME
+        </button>
       </a>
+
       {/* Form do Criar */}
+      <LabelInputButton
+        // Div e Label
+        classNameDiv="adicionar"
+        classNameLabel="adicionar-text"
+        htmlForLabel="criar_todo"
+        labelText="adicionar à lista:"
+        // Input e Button
+        classNameInput="input"
+        idInput="criar_todo"
+        onChangeInput={mexerMudancaCriar}
+        inputValue={novaTodolist.text}
+
+        onClickButton={mexerCriarTodo}
+        nameInput="text"
+        buttonText="adicionar."
+      />
+      {/* Form do Criar
       <div className="button-label-input adicionar">
         <label htmlFor="criar_todo" className="button-label adicionar-text">
           adicionar à lista:
@@ -102,7 +124,29 @@ function MeuTodoList() {
         >
           adicionar.
         </button>
-      </div>
+      </div> */}
+
+      {/* <div className="button-label-input {props.classNameDiv}">
+        <label htmlFor={props.htmlForLabel} className="button-label {props.classNameLabel}">
+          {props.labelText}
+        </label>
+        <input
+          type="text"
+          className={props.classNameInput}
+          id={props.idInput}
+          onChange={props.onChangeInput}
+          name={props.nameInput}
+          value={novaTodolist.text}
+        />
+        <button
+          type="button"
+          className="button"
+          onClick={props.onClickButton}
+        >
+          {props.buttonText}
+        </button>
+      </div> */}
+
       {/* Form do Read by Id */}
       <div className="button-label-input procurar">
         <label htmlFor="pesquisar_todo" className="button-label procurar-text">
@@ -128,7 +172,10 @@ function MeuTodoList() {
           <div key={index} className="todoListReadAll">
             <span>→ </span>
             <input type="checkbox" />
-            <span className="todo-text">  {todo.text} || ID: "{todo.id}"</span>
+            <span className="todo-text">
+              {" "}
+              {todo.text} || ID: "{todo.id}"
+            </span>
           </div>
         ))}
       </div>
