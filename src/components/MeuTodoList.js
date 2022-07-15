@@ -2,20 +2,30 @@ import { useState, useEffect } from "react";
 import { LabelInputButton } from "./LabelInputButton/LabelInputButton";
 
 function MeuTodoList() {
-  const baseURL = "http://localhost:8000/list";
+  const baseURL = "http://localhost:8001/list";
   // https://github.com/maxxcleiton/backend-todolist.json-blue
 
   // useState
   // Aqui é responsável pela renderização em tela (todoList.map(()=>())
   const [todoList, setTodoList] = useState([]);
+
   // Usado para fazer a pesquisa no Read by ID
   const [todo, setTodo] = useState({
     todo_id: "",
   });
+
   // Usado para definir nova lista no Read All
   const [novaTodolist, setNovaTodoList] = useState({
     text: "",
   });
+
+  const [showEditForm, setShowEditForm] = useState(false)
+
+  // Novo state para capturar a todo atualizada. (Não sei como funciona ainda)
+  const [todoAtualizado, setTodoAtualizado] = useState({
+    text:"",
+    id:""
+  })
 
   // Async functions
   // Criar = CRUD
@@ -32,10 +42,6 @@ function MeuTodoList() {
     setTodoList([novaTodo]);
   }
 
-  // Read by ID
-
-  // Handle functions (manejo)
-  // Criar todo (Criar = CRUD)
   const mexerMudancaCriar = (event) => {
     console.log("hangle change Criar");
     setNovaTodoList({
@@ -79,9 +85,20 @@ function MeuTodoList() {
     setTodo({ ...todo, [event.target.name]: event.target.value });
   };
 
+
+  function showFormEdit(){
+    {/* Update (Edit Task) */}
+    <>
+    <input type="text" />
+    <button type="button">
+      Editar
+    </button>
+    </>
+  }
+
   return (
     <div>
-      <a className="button-home" href="http://localhost:3000/">
+      <a className="button-home" href="http://localhost:3001/">
         <button type="button" className="button">
           Voltar pra HOME
         </button>
@@ -147,7 +164,7 @@ function MeuTodoList() {
         </button>
       </div> */}
 
-      {/* Form do Read by Id */}
+      {/* Form do Read by Id (pesquisar) */}
       <div className="button-label-input procurar">
         <label htmlFor="pesquisar_todo" className="button-label procurar-text">
           pesquisar item por ID:
@@ -166,9 +183,10 @@ function MeuTodoList() {
         </button>
       </div>
 
-      {/* Read All */}
+      {/* Read All (Show all tasks) */}
       <div className="readAllMap">
         {todoList.map((todo, index) => (
+          <div>
           <div key={index} className="todoListReadAll">
             <span>→ </span>
             <input type="checkbox" />
@@ -176,7 +194,24 @@ function MeuTodoList() {
               {" "}
               {todo.text} || ID: "{todo.id}"
             </span>
-          </div>
+            <button
+            onClick={()=>setShowEditForm(true)}
+            >Editar</button>
+            <button>Deletar</button>
+            </div>
+
+            <div>
+            {showEditForm ? 
+                  <div className="editForm">
+                    <input type="text" />
+                    <button type="button">
+                      Editar
+                    </button>
+                    </div>
+            :null}
+            </div>
+
+            </div>
         ))}
       </div>
     </div>
