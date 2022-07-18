@@ -20,8 +20,8 @@ export function ToDoList() {
   // Show Edit Form
   const [showEditForm, setShowEditForm] = useState(false);
 
-  // Capture new Task
-  const [todoAtualizado, setTodoAtualizado] = useState({
+  // Edited task
+  const [newEditedTodoTask, setNewEditedTodoTask] = useState({
     text: "",
     id: "",
   });
@@ -78,20 +78,21 @@ export function ToDoList() {
 
   // Update (Edit Task) 
   const onChangeInputEdit = (event) => {
-    setTodoAtualizado({
-      ...todoAtualizado,
+    setNewEditedTodoTask({
+      ...newEditedTodoTask,
       [event.target.name]: event.target.value,
     });
   };
   async function editTodo(id, editedTodo) {
     const response_editedTodo = await TodoServices.updateById(id, editedTodo);
-    setTodoAtualizado({ ...response_editedTodo });
+    setNewEditedTodoTask({ ...response_editedTodo });
   };
   const onClickButtonEdit = () => {
-    const editedTodo = { ...todoAtualizado };
+    const editedTodo = { ...newEditedTodoTask };
     const id = editedTodo.id;
 
     delete editedTodo.id;
+    setShowEditForm(false)
     editTodo(id, editedTodo);
   };
 
@@ -152,8 +153,7 @@ export function ToDoList() {
         </button>
       </div>
 
-      {/* UPDATE (edit tasks) */}
-      <div>
+      {/* Update (edit tasks) */}
         {showEditForm ? (
           <div className={"button-label-input update"}>
             <label htmlFor="update_todo" className={"button-label"}>
@@ -165,7 +165,7 @@ export function ToDoList() {
               id="update_todo"
               onChange={onChangeInputEdit}
               name="todo_update"
-              value={todoAtualizado.text}
+              value={newEditedTodoTask.text}
               // value={newTodoList.text}
             />
             <button
@@ -178,9 +178,8 @@ export function ToDoList() {
             </button>
           </div>
         ) : null}
-      </div>
 
-      <div>
+      {/* Delete (delete tasks) */}
         {showDeleteAsk ? (
           <div className={"button-label-input update"}>
             <span className={"button-label"}>
@@ -191,7 +190,6 @@ export function ToDoList() {
             </button>
           </div>
         ) : null}
-      </div>
 
       {/* Read All (Show all tasks) */}
       <div className="readAllMap">
