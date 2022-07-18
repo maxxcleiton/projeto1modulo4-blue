@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { ToDoList } from './components/ToDoList';
+import { ToDoList } from './components/ToDoList/ToDoList';
 import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer';
 
