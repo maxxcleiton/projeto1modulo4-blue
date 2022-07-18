@@ -12,7 +12,8 @@ html {
 }
 
 body {
-    background-color: #fffefc;
+    color: #d1cdc7;
+    background-color: #352300;
     transition: 1.6s;
     min-height: 100vh;
     display: flex;
@@ -21,39 +22,28 @@ body {
 }
 
 .header {
-    /* height: 40vh; */
     margin-top: 3rem;
-    /* display: flex; */
-    /* justify-content: center; */
     margin-bottom: 2rem;
 }
 
 .header-title {
-    /* text-align: center; */
-    /* border-bottom: 0.2rem solid; */
-    /* width: 100%; */
     text-align: center;
-
 }
 
 .header-subtitle-text {
-    /* font-size: 15px; */
     font-weight: 600;
-    /* width: 25vw; */
     text-align: center;
 }
 
-.procurar, .adicionar {
+.procurar, .adicionar, .update {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     margin-bottom: 20px;
     
 }
 
 .main {
-    /* height: 40vh; */
     display: flex;
     justify-content: center;
 }
@@ -61,41 +51,37 @@ body {
 .readAllMap {
     display: flex;
     flex-direction: column;
-    /* padding-top: 1rem; */
-    /* background-color: rgb(192, 192, 192, 0.3); */
     padding-bottom: 5rem
 
 }
 
 .todoListReadAll {
-    /* padding-left: 37vw; */
-    /* padding-bottom: 1rem; */
-    padding: 10px 0px 10px 0px;
+
     text-align: left;
     background-color: rgb(104, 104, 104, 0.3);
     margin: 5px 0 1px 0; 
     display: flex;
-    /* margin: 10px; */
-    padding: 10px;
-    /* flex-direction: column; */
+    padding: 7px;
     justify-content: center;
 
 }
 
 .todo-text {
-    /* opacity: 1.0; */
-    font-weight: 600;
+    font-weight: 400;
+    color: white;
+    margin: 0 10px;
 }
 
 .button-home {
-    /* text-align: center; */
     display: flex;
     justify-content: center;
     text-decoration: none;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .button {
+    background-color: #6b6b6b;
+    color: white;
     margin-top: 0.5rem;
     border: none;
     padding: 5px;
@@ -103,8 +89,46 @@ body {
     font-weight: 600;
 }
 
+.button-red {
+    background-color: rgba(255, 0, 0, .7);
+    color: white;
+    margin-top: 0.5rem;
+    border: none;
+    padding: 5px;
+    border-radius: 10%;
+    font-weight: 600;
+}
+.button-blue {
+    background-color: rgb(60, 0, 255, .7);
+    color: white;
+    margin-top: 0.5rem;
+    border: none;
+    padding: 5px;
+    border-radius: 10%;
+    font-weight: 600;
+}
+
+.button-red-map {
+    background-color: rgba(255, 0, 0, .7);
+    color: white;
+    border: none;
+    padding: 2px;
+    border-radius: 10%;
+    font-weight: 600;
+}
+
+.button-blue-map {
+    background-color: rgb(60, 0, 255, .7);
+    color: white;
+    border: none;
+    padding: 2px;
+    border-radius: 10%;
+    font-weight: 600;
+    margin: 0px 7px;
+}
+
 .button:hover {
-    background-color: rgb(0, 0, 0, .2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .editForm {
