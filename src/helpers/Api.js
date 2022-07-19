@@ -7,3 +7,8 @@ const TodoAPI = {
 export const Api = {
     baseURL: "http://localhost:8001", ...TodoAPI
 }
+
+const urls = {
+    production: "https://tarefa-rest-api.herokuapp.com/",
+    development: "http://localhost:8000",
+  };
