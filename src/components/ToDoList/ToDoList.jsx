@@ -80,17 +80,20 @@ export function ToDoList() {
   const onChangeInputEdit = (event) => {
     setNewEditedTodoTask({
       ...newEditedTodoTask,
-      [event.target.name]: event.target.value,
+      // [event.target.name]: event.target.value
+      text: event.target.value
     });
+    console.log(event.target.name)
   };
   async function editTodo(id, editedTodo) {
     const response_editedTodo = await TodoServices.updateById(id, editedTodo);
-    setNewEditedTodoTask({ ...response_editedTodo });
+    setNewEditedTodoTask({...response_editedTodo});
   };
-  const onClickButtonEdit = () => {
-    const editedTodo = { ...newEditedTodoTask };
+  const onClickButtonEdit = (event) => {
+    console.log(event.target.id)
+    const editedTodo = {...newEditedTodoTask};
     const id = editedTodo.id;
-
+    console.log(id)
     delete editedTodo.id;
     setShowEditForm(false)
     editTodo(id, editedTodo);
@@ -164,12 +167,12 @@ export function ToDoList() {
               className="input"
               id="update_todo"
               onChange={onChangeInputEdit}
-              name="todo_update"
+              name="text"
               value={newEditedTodoTask.text}
               // value={newTodoList.text}
             />
             <button
-              // id={todoList.id}
+              id={todoList.id}
               type="button"
               className="button-blue"
               onClick={onClickButtonEdit}
@@ -201,7 +204,9 @@ export function ToDoList() {
               </span>
               <button
                 className="button-blue-map"
-                onClick={() => setShowEditForm(true)}
+                onClick={() => {setShowEditForm(true)
+                  setNewEditedTodoTask({...newEditedTodoTask, id: todo.id})
+                }}
               >
                 Editar
               </button>
