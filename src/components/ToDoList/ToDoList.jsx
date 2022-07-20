@@ -99,6 +99,7 @@ export function ToDoList() {
     delete editedTodo.id;
     setShowEditForm(false)
     editTodo(id, editedTodo);
+    window.location.reload(true);
   };
 
   // Delete task
