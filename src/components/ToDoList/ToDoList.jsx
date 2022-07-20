@@ -34,7 +34,9 @@ export function ToDoList() {
   // Create = CRUD
   async function Create(todo) {
     const novaTodo = TodoServices.create(todo);
-    setTodoList([novaTodo]);
+    window.location.reload(true);
+    // setTodoList([novaTodo]);
+    // readTaskById([novaTodo.id])
   }
 
   const handleSetTodoCriar = (event) => {
@@ -148,7 +150,7 @@ export function ToDoList() {
           id="pesquisar_todo"
           onChange={handleSetTodo}
           name="todo_id"
-          value={todo.todo_id}
+          // value={todo.todo_id}
           // value={newTodoList.text}
         />
         <button type="button" className="button" onClick={handleSearchClickButton}>
